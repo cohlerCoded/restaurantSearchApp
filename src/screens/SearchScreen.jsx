@@ -7,12 +7,25 @@ import SearchBar from '../components/SearchBar'
 const SearchScreen = () => {
     const [term, setTerm] = useState('')
     const [results, setResults] = useState([])
+
+    const searchApi= async () => {
+        const res = await yelp.get('/search',{
+            params:{
+                term,
+                limit:50,
+                location: 'san jose'
+            }
+        })
+        setResults(res.data.businesses);
+        console.log(res.data.businesses);
+    }
+
     return (
         <View>
             <SearchBar 
                 term={term}
-                onTermChange={(newTerm)=> setTerm(newTerm)}
-                onTermSubmit={() => console.log('term submitted')}
+                onTermChange={setTerm}
+                onTermSubmit={searchApi}
             />
             <Text>We found {results.length} results</Text>
         </View>
