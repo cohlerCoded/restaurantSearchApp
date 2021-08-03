@@ -7,37 +7,51 @@ import SearchBar from '../components/SearchBar'
 const SearchScreen = () => {
   const [term, setTerm] = useState('')
   const [results, setResults] = useState([])
+  const [errorMessage, setErrorMessage] = useState('')
 
   const searchApi = async () => {
-    const res = await yelp.get('/search', {
-      params: {
-        term,
-        limit: 50,
-        location: 'los angeles',
-      },
-    })
-    setResults(res.data.businesses)
-    console.log(res.data.businesses)
+    try {
+      const res = await yelp.get('/search', {
+        params: {
+          term,
+          limit: 50,
+          location: 'los angeles',
+        },
+      })
+      setResults(res.data.businesses)
+    } catch (err) {
+      setErrorMessage(err.message)
+    }
   }
 
   return (
     <View>
       <SearchBar term={term} onTermChange={setTerm} onTermSubmit={searchApi} />
-      <Text>We found {results.length} results</Text>
-      <FlatList
-        showsVerticalScrollIndicator={false}
-        keyExtractor={(business) => business.id}
-        data={results}
-        renderItem={({ item }) => {
-          return (
-            <ImageDetail
-              title={item.name}
-              rating={item.rating}
-              imageURL={item.image_url}
-            />
-          )
-        }}
-      />
+      {errorMessage ? (
+        <Text>{errorMessage}</Text>
+      ) : (
+        <View>
+          <Text>We found {results.length} results</Text>
+          <FlatList
+            showsVerticalScrollIndicator={false}
+            keyExtractor={(business) => business.id}
+            data={results}
+            renderItem={({ item }) => {
+              return (
+                <ImageDetail
+                  title={item.name}
+                  rating={item.rating}
+                  imageURL={
+                    item.image_url
+                      ? item.image_url
+                      : 'https://st4.depositphotos.com/14953852/24787/v/600/depositphotos_247872612-stock-illustration-no-image-available-icon-vector.jpg'
+                  }
+                />
+              )
+            }}
+          />
+        </View>
+      )}
     </View>
   )
 }
