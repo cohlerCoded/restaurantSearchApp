@@ -9,6 +9,18 @@ const SearchScreen = () => {
   const [term, setTerm] = useState('')
   const [searchApi, results, errorMessage] = useResults()
 
+  const costEffective = []
+  const bitPricier = []
+  const bigSpender = []
+
+  results.forEach((result) =>
+    result.price === '$'
+      ? costEffective.push(result)
+      : result.price === '$$'
+      ? bitPricier.push(result)
+      : bigSpender.push(result)
+  )
+
   return (
     <View>
       <SearchBar
@@ -21,9 +33,9 @@ const SearchScreen = () => {
       ) : (
         <View>
           <Text>We found {results.length} results</Text>
-          <ResultsList title='Cost Effective' />
-          <ResultsList title='A Bit Pricier' />
-          <ResultsList title='Big Spender' />
+          <ResultsList title='Cost Effective' results={costEffective} />
+          <ResultsList title='Bit Pricier' results={bitPricier} />
+          <ResultsList title='Big Spender' results={bigSpender} />
           {/* <FlatList
             showsVerticalScrollIndicator={false}
             keyExtractor={(business) => business.id}
