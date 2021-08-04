@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { StyleSheet, Text, View, FlatList } from 'react-native'
 import yelp from '../api/yelp'
 import ImageDetail from '../components/ImageDetail'
@@ -27,6 +27,10 @@ const SearchScreen = () => {
 
   //call api when component is rendered (BAD!!!)
   // searchApi('pasta')
+
+  useEffect(() => {
+    searchApi('pasta')
+  }, [])
 
   return (
     <View>
