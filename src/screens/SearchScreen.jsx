@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { StyleSheet, Text, View, FlatList } from 'react-native'
 import ImageDetail from '../components/ImageDetail'
+import ResultsList from '../components/ResultsList'
 import SearchBar from '../components/SearchBar'
 import useResults from '../hooks/useResults'
 
@@ -20,7 +21,10 @@ const SearchScreen = () => {
       ) : (
         <View>
           <Text>We found {results.length} results</Text>
-          <FlatList
+          <ResultsList title='Cost Effective' />
+          <ResultsList title='A Bit Pricier' />
+          <ResultsList title='Big Spender' />
+          {/* <FlatList
             showsVerticalScrollIndicator={false}
             keyExtractor={(business) => business.id}
             data={results}
@@ -37,7 +41,7 @@ const SearchScreen = () => {
                 />
               )
             }}
-          />
+          /> */}
         </View>
       )}
     </View>
