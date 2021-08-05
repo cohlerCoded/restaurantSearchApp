@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { StyleSheet, Text, View, FlatList } from 'react-native'
+import { StyleSheet, Text, View, ScrollView } from 'react-native'
 import ImageDetail from '../components/ImageDetail'
 import ResultsList from '../components/ResultsList'
 import SearchBar from '../components/SearchBar'
@@ -22,7 +22,7 @@ const SearchScreen = () => {
   )
 
   return (
-    <View>
+    <ScrollView>
       <SearchBar
         term={term}
         onTermChange={setTerm}
@@ -56,7 +56,7 @@ const SearchScreen = () => {
           /> */}
         </View>
       )}
-    </View>
+    </ScrollView>
   )
 }
 
