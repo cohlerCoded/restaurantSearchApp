@@ -1,15 +1,19 @@
 import React from 'react'
 import { StyleSheet, TextInput, View } from 'react-native'
-import { Feather } from '@expo/vector-icons'
+import { Feather, Entypo } from '@expo/vector-icons'
 
-const SearchBar = ({ term, onTermChange, onTermSubmit }) => {
+const SearchBar = ({ term, onTermChange, onTermSubmit, icon }) => {
   return (
     <View style={styles.backgroundStyle}>
-      <Feather name='search' style={styles.searchIcon} />
+      {icon === 'search' ? (
+        <Feather name={icon} style={styles.searchIcon} />
+      ) : (
+        <Entypo name={icon} style={styles.searchIcon} />
+      )}
       <TextInput
         autoCapitalize='none'
         autoCorrect={false}
-        placeholder='Search'
+        placeholder={icon === 'search' ? 'Search' : 'Near'}
         style={styles.searchInput}
         value={term}
         onChangeText={onTermChange}
@@ -21,10 +25,11 @@ const SearchBar = ({ term, onTermChange, onTermSubmit }) => {
 
 const styles = StyleSheet.create({
   backgroundStyle: {
-    height: 50,
+    height: 40,
     backgroundColor: '#e5e5e5',
     borderRadius: 5,
-    margin: 15,
+    marginVertical: 2,
+    marginHorizontal: 15,
     flexDirection: 'row',
   },
   searchInput: {

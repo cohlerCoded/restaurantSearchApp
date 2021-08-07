@@ -6,6 +6,7 @@ import useResults from '../hooks/useResults'
 
 const SearchScreen = () => {
   const [term, setTerm] = useState('')
+  const [location, setLocation] = useState('')
   const [searchApi, results, errorMessage] = useResults()
 
   const costEffective = []
@@ -22,11 +23,20 @@ const SearchScreen = () => {
 
   return (
     <>
-      <SearchBar
-        term={term}
-        onTermChange={setTerm}
-        onTermSubmit={() => searchApi(term)}
-      />
+      <View style={{ marginVertical: 6 }}>
+        <SearchBar
+          icon={'search'}
+          term={term}
+          onTermChange={setTerm}
+          onTermSubmit={() => searchApi(term)}
+        />
+        <SearchBar
+          icon={'location-pin'}
+          term={location}
+          onTermChange={setLocation}
+          onTermSubmit={() => searchApi(term, location)}
+        />
+      </View>
       {errorMessage ? (
         <Text>{errorMessage}</Text>
       ) : (

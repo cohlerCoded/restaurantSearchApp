@@ -5,14 +5,14 @@ export default () => {
   const [results, setResults] = useState([])
   const [errorMessage, setErrorMessage] = useState('')
 
-  const searchApi = async (searchTerm) => {
+  const searchApi = async (searchTerm, location = 'los angeles') => {
     console.log('api call made')
     try {
       const res = await yelp.get('/search', {
         params: {
           term: searchTerm,
           limit: 50,
-          location: 'los angeles',
+          location,
         },
       })
       setResults(res.data.businesses)
