@@ -28,13 +28,17 @@ const SearchScreen = () => {
           icon={'search'}
           term={term}
           onTermChange={setTerm}
-          onTermSubmit={() => searchApi(term)}
+          onTermSubmit={() =>
+            searchApi(term || 'food', location || 'los angeles')
+          }
         />
         <SearchBar
           icon={'location-pin'}
           term={location}
           onTermChange={setLocation}
-          onTermSubmit={() => searchApi(term, location)}
+          onTermSubmit={() =>
+            searchApi(term || 'food', location || 'los angeles')
+          }
         />
       </View>
       {errorMessage ? (
