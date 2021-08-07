@@ -11,34 +11,11 @@ import WebView from 'react-native-webview'
 import Carousel from 'react-native-snap-carousel'
 import yelp from '../api/yelp'
 
-const exampleItems = [
-  {
-    title: 'Item 1',
-    text: 'Text 1',
-  },
-  {
-    title: 'Item 2',
-    text: 'Text 2',
-  },
-  {
-    title: 'Item 3',
-    text: 'Text 3',
-  },
-  {
-    title: 'Item 4',
-    text: 'Text 4',
-  },
-  {
-    title: 'Item 5',
-    text: 'Text 5',
-  },
-]
-
 export default function ResultShowScreen({ navigation }) {
   const [result, setResult] = useState(null)
   const [activeIndex, setActiveIndex] = useState(0)
-  const [carouselItems, setCarouselItems] = useState(null)
-  const ref = useRef(null)
+  const [carouselItems, setCarouselItems] = useState([])
+  const ref = useRef()
 
   const url = navigation.getParam('url')
   const id = navigation.getParam('id')
@@ -48,6 +25,7 @@ export default function ResultShowScreen({ navigation }) {
     setResult(res.data)
     setCarouselItems(res.data.photos)
     console.log(carouselItems)
+    console.log(res.data.photos)
   }
 
   useEffect(() => {
@@ -101,20 +79,22 @@ export default function ResultShowScreen({ navigation }) {
         }}
       >
         {result && (
-          <Text style={{ fontSize: 30, position: 'absolute', top: 10 }}>
+          <Text style={{ fontSize: 24, position: 'absolute', top: '10%' }}>
             {result.name}
           </Text>
         )}
-        <Carousel
-          layout={'tinder'}
-          layoutCardOffset={`4`}
-          ref={ref}
-          data={carouselItems}
-          sliderWidth={300}
-          itemWidth={300}
-          renderItem={renderItem}
-          onSnapToItem={(index) => setActiveIndex(index)}
-        />
+        <View style={{ top: '50%' }}>
+          <Carousel
+            layout={'default'}
+            layoutCardOffset={9}
+            ref={ref}
+            data={carouselItems}
+            sliderWidth={300}
+            itemWidth={300}
+            renderItem={renderItem}
+            onSnapToItem={(index) => setActiveIndex(index)}
+          />
+        </View>
       </View>
     </SafeAreaView>
   )
