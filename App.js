@@ -6,7 +6,7 @@ import TinderScreen from './src/screens/TinderScreen'
 
 const navigator = createStackNavigator(
   {
-    Search: SearchScreen,
+    Search: TinderScreen,
     Show: ResultShowScreen,
   },
   {
