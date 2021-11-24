@@ -34,7 +34,6 @@ export default function ResultShowScreen({ route, navigation }) {
 
   ////////////WEBVIEW///////////////////////
   console.log(url)
-  return <WebView source={{ uri: url }} />
 
   ////////////////////FLATLIST/////////////////
   //   return (
