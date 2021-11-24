@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { StyleSheet, Text, View, ScrollView } from 'react-native'
+import { TouchableOpacity } from 'react-native-gesture-handler'
 import ResultsList from '../components/ResultsList'
 import SearchBar from '../components/SearchBar'
 import useResults from '../hooks/useResults'
@@ -24,6 +25,11 @@ const SearchScreen = () => {
   return (
     <>
       <View style={{ marginVertical: 6 }}>
+        <TouchableOpacity>
+          <Text>NEW</Text>
+          <Text>Find Favorite Places By TinderSwipe</Text>
+          <Text>NEW</Text>
+        </TouchableOpacity>
         <SearchBar
           icon={'search'}
           term={term}

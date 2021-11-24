@@ -105,7 +105,7 @@ const TinderScreen = ({ navigation }) => {
             onSwiped={onSwiped}
             onTapCard={() => {
               console.log(url)
-              navigation.navigate('Show', { url })
+              navigation.navigate('Webview', { url })
               // swiperRef.current.swipeLeft()
             }}
             cardVerticalMargin={50}

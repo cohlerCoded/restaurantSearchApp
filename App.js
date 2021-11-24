@@ -4,18 +4,19 @@ import { createStackNavigator } from 'react-navigation-stack'
 import ResultShowScreen from './src/screens/ResultShowScreen'
 import SearchScreen from './src/screens/SearchScreen'
 import TinderScreen from './src/screens/TinderScreen'
-
+import WebviewScreen from './src/screens/WebviewScreen'
 LogBox.ignoreLogs(['Remote debugger'])
 
 const navigator = createStackNavigator(
   {
-    Search: TinderScreen,
+    Search: SearchScreen,
     Show: ResultShowScreen,
+    Webview: WebviewScreen,
   },
   {
     initialRouteName: 'Search',
     defaultNavigationOptions: {
-      title: 'Business Search',
+      title: 'Menu Madness',
     },
   }
 )
