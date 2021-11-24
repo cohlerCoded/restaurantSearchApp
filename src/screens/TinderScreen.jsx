@@ -13,6 +13,8 @@ import { Transitioning, Transition } from 'react-native-reanimated'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 import SearchBar from '../components/SearchBar'
 import useResults from '../hooks/useResults'
+import WebView from 'react-native-webview'
+import { TouchableOpacity } from 'react-native-gesture-handler'
 
 const { width } = Dimensions.get('window').width
 
@@ -53,7 +55,9 @@ const transition = (
 const swiperRef = React.createRef()
 const transitionRef = React.createRef()
 
+let url
 const Card = ({ card }) => {
+  url = card.url
   return (
     <View style={styles.card}>
       <Image source={{ uri: card.image_url }} style={styles.cardImage} />
@@ -61,7 +65,7 @@ const Card = ({ card }) => {
   )
 }
 
-const TinderScreen = () => {
+const TinderScreen = ({ navigation }) => {
   const [term, setTerm] = useState('')
   const [location, setLocation] = useState('')
   const [searchApi, results, errorMessage] = useResults()
@@ -99,7 +103,11 @@ const TinderScreen = () => {
             infinite
             backgroundColor={'transparent'}
             onSwiped={onSwiped}
-            onTapCard={() => swiperRef.current.swipeLeft()}
+            onTapCard={() => {
+              console.log(url)
+              navigation.navigate('Show', { url })
+              // swiperRef.current.swipeLeft()
+            }}
             cardVerticalMargin={50}
             stackSize={stackSize}
             stackScale={10}

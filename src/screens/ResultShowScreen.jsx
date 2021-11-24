@@ -6,12 +6,13 @@ import {
   FlatList,
   Image,
   SafeAreaView,
+  TouchableOpacity,
 } from 'react-native'
 import WebView from 'react-native-webview'
 import Carousel from 'react-native-snap-carousel'
 import yelp from '../api/yelp'
 
-export default function ResultShowScreen({ navigation }) {
+export default function ResultShowScreen({ route, navigation }) {
   const [result, setResult] = useState(null)
   const [activeIndex, setActiveIndex] = useState(0)
   const [carouselItems, setCarouselItems] = useState([])
@@ -22,6 +23,7 @@ export default function ResultShowScreen({ navigation }) {
 
   const getResult = async (id) => {
     const res = await yelp.get(`/${id}`)
+    console.log(res.data)
     setResult(res.data)
     setCarouselItems(res.data.photos)
   }
@@ -31,7 +33,8 @@ export default function ResultShowScreen({ navigation }) {
   }, [])
 
   ////////////WEBVIEW///////////////////////
-  // return <WebView source={{ uri: url }} />
+  console.log(url)
+  return <WebView source={{ uri: url }} />
 
   ////////////////////FLATLIST/////////////////
   //   return (
@@ -48,54 +51,58 @@ export default function ResultShowScreen({ navigation }) {
   //   )
   // }
 
-  const renderItem = useCallback(
-    ({ item, index }) => (
-      <View
-        style={{
-          backgroundColor: 'floralwhite',
-          borderRadius: 5,
-          height: 300,
-          padding: 10,
-          marginLeft: 15,
-          marginRight: 15,
-        }}
-      >
-        <Image style={styles.image} source={{ uri: item }} />
-      </View>
-    ),
-    []
-  )
+  //////////////////////////CAROUSEL PICS//////////////////////////////////
 
-  return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: 'rebeccapurple' }}>
-      <View
-        style={{
-          flex: 1,
-          flexDirection: 'row',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}
-      >
-        {result && (
-          <Text style={{ fontSize: 24, position: 'absolute', top: '10%' }}>
-            {result.name}
-          </Text>
-        )}
-        <View style={{ top: '50%' }}>
-          <Carousel
-            layout={'default'}
-            layoutCardOffset={9}
-            ref={ref}
-            data={carouselItems}
-            sliderWidth={300}
-            itemWidth={300}
-            renderItem={renderItem}
-            onSnapToItem={(index) => setActiveIndex(index)}
-          />
-        </View>
-      </View>
-    </SafeAreaView>
-  )
+  //   const renderItem = useCallback(
+  //     ({ item, index }) => (
+  //       <TouchableOpacity onPress={showWebView}>
+  //         <View
+  //           style={{
+  //             backgroundColor: 'floralwhite',
+  //             borderRadius: 5,
+  //             height: 300,
+  //             padding: 10,
+  //             marginLeft: 15,
+  //             marginRight: 15,
+  //           }}
+  //         >
+  //           <Image style={styles.image} source={{ uri: item }} />
+  //         </View>
+  //       </TouchableOpacity>
+  //     ),
+  //     []
+  //   )
+
+  //   return (
+  //     <SafeAreaView style={{ flex: 1, backgroundColor: 'rebeccapurple' }}>
+  //       <View
+  //         style={{
+  //           flex: 1,
+  //           flexDirection: 'row',
+  //           justifyContent: 'center',
+  //           alignItems: 'center',
+  //         }}
+  //       >
+  //         {result && (
+  //           <Text style={{ fontSize: 24, position: 'absolute', top: '10%' }}>
+  //             {result.name}
+  //           </Text>
+  //         )}
+  //         <View style={{ top: '50%' }}>
+  //           <Carousel
+  //             layout={'default'}
+  //             layoutCardOffset={9}
+  //             ref={ref}
+  //             data={carouselItems}
+  //             sliderWidth={300}
+  //             itemWidth={300}
+  //             renderItem={renderItem}
+  //             onSnapToItem={(index) => setActiveIndex(index)}
+  //           />
+  //         </View>
+  //       </View>
+  //     </SafeAreaView>
+  //   )
 }
 
 const styles = StyleSheet.create({
