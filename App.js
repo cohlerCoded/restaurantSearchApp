@@ -12,6 +12,7 @@ const navigator = createStackNavigator(
     Search: SearchScreen,
     Show: ResultShowScreen,
     Webview: WebviewScreen,
+    Tinder: TinderScreen,
   },
   {
     initialRouteName: 'Search',

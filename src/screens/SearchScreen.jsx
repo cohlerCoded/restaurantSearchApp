@@ -5,7 +5,7 @@ import ResultsList from '../components/ResultsList'
 import SearchBar from '../components/SearchBar'
 import useResults from '../hooks/useResults'
 
-const SearchScreen = () => {
+const SearchScreen = ({ navigation }) => {
   const [term, setTerm] = useState('')
   const [location, setLocation] = useState('')
   const [searchApi, results, errorMessage] = useResults()
@@ -25,10 +25,26 @@ const SearchScreen = () => {
   return (
     <>
       <View style={{ marginVertical: 6 }}>
-        <TouchableOpacity>
-          <Text>NEW</Text>
-          <Text>Find Favorite Places By TinderSwipe</Text>
-          <Text>NEW</Text>
+        <TouchableOpacity
+          style={{
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'space-around',
+            marginVertical: 10,
+            borderColor: 'red',
+            borderWidth: 3,
+            paddingVertical: 15,
+            marginHorizontal: 10,
+            borderRadius: 10,
+            backgroundColor: 'pink',
+          }}
+          onPress={() => navigation.navigate('Tinder')}
+        >
+          <Text style={{ fontSize: 16 }}>&#128525;</Text>
+          <Text style={{ fontSize: 16 }}>
+            Find Favorite Places By TinderSwipe
+          </Text>
+          <Text style={{ fontSize: 16 }}>&#128525;</Text>
         </TouchableOpacity>
         <SearchBar
           icon={'search'}
