@@ -1,8 +1,11 @@
+import { LogBox } from 'react-native'
 import { createAppContainer } from 'react-navigation'
 import { createStackNavigator } from 'react-navigation-stack'
 import ResultShowScreen from './src/screens/ResultShowScreen'
 import SearchScreen from './src/screens/SearchScreen'
 import TinderScreen from './src/screens/TinderScreen'
+
+LogBox.ignoreLogs(['Remote debugger'])
 
 const navigator = createStackNavigator(
   {
@@ -10,7 +13,7 @@ const navigator = createStackNavigator(
     Show: ResultShowScreen,
   },
   {
-    initialRouteName: 'Search',
+    initialRouteName: 'Show',
     defaultNavigationOptions: {
       title: 'Business Search',
     },
