@@ -62,9 +62,10 @@ const SearchScreen = ({ navigation }) => {
             icon={'location-pin'}
             term={location}
             onTermChange={setLocation}
-            onTermSubmit={() =>
+            onTermSubmit={() => {
               searchApi(term || 'food', location || 'los angeles')
-            }
+              setShowSetLocation(false)
+            }}
           />
         </View>
       </View>
