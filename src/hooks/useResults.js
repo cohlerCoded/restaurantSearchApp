@@ -14,7 +14,15 @@ export default () => {
           location,
         },
       })
-      setResults(res.data.businesses)
+      const resultList = res.data.businesses.map((business) => {
+        business.image_url.length !== 0
+          ? (business.image_url = business.image_url)
+          : (business.image_url =
+              'https://i2.wp.com/paao.org/wp-content/uploads/2020/11/no-image-available.jpg?w=420&ssl=1')
+        return business
+      })
+      console.log(resultList.map((biz) => biz.image_url))
+      setResults(resultList)
     } catch (err) {
       setErrorMessage(err.message)
     }
