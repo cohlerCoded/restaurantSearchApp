@@ -8,6 +8,7 @@ import useResults from '../hooks/useResults'
 const SearchScreen = ({ navigation }) => {
   const [term, setTerm] = useState('')
   const [location, setLocation] = useState('')
+  const [showSetLocation, setShowSetLocation] = useState(false)
   const [searchApi, results, errorMessage] = useResults()
 
   const costEffective = []
@@ -30,38 +31,42 @@ const SearchScreen = ({ navigation }) => {
             display: 'flex',
             flexDirection: 'row',
             justifyContent: 'space-around',
-            marginVertical: 10,
+            marginVertical: 5,
             borderColor: 'red',
             borderWidth: 3,
-            paddingVertical: 15,
+            paddingVertical: 10,
             marginHorizontal: 10,
             borderRadius: 10,
             backgroundColor: 'pink',
           }}
           onPress={() => navigation.navigate('Tinder')}
         >
-          <Text style={{ fontSize: 16 }}>&#128525;</Text>
-          <Text style={{ fontSize: 16 }}>
-            Find Favorite Places By TinderSwipe
+          <Text style={{ fontSize: 14 }}>&#128525;</Text>
+          <Text style={{ fontSize: 14 }}>
+            Press Here To Find Places By TinderSwipe
           </Text>
-          <Text style={{ fontSize: 16 }}>&#128525;</Text>
+          <Text style={{ fontSize: 14 }}>&#128525;</Text>
         </TouchableOpacity>
-        <SearchBar
-          icon={'search'}
-          term={term}
-          onTermChange={setTerm}
-          onTermSubmit={() =>
-            searchApi(term || 'food', location || 'los angeles')
-          }
-        />
-        <SearchBar
-          icon={'location-pin'}
-          term={location}
-          onTermChange={setLocation}
-          onTermSubmit={() =>
-            searchApi(term || 'food', location || 'los angeles')
-          }
-        />
+        <View onFocus={() => setShowSetLocation(true)}>
+          <SearchBar
+            icon={'search'}
+            term={term}
+            onTermChange={setTerm}
+            onTermSubmit={() =>
+              searchApi(term || 'food', location || 'los angeles')
+            }
+          />
+        </View>
+        <View style={{ display: !showSetLocation ? 'none' : 'flex' }}>
+          <SearchBar
+            icon={'location-pin'}
+            term={location}
+            onTermChange={setLocation}
+            onTermSubmit={() =>
+              searchApi(term || 'food', location || 'los angeles')
+            }
+          />
+        </View>
       </View>
       {errorMessage ? (
         <Text>{errorMessage}</Text>
