@@ -55,9 +55,10 @@ const transition = (
 const swiperRef = React.createRef()
 const transitionRef = React.createRef()
 
-let url
+let url, id
 const Card = ({ card }) => {
   url = card.url
+  id = card.id
   return (
     <View style={styles.card}>
       <Image source={{ uri: card.image_url }} style={styles.cardImage} />
@@ -104,8 +105,8 @@ const TinderScreen = ({ navigation }) => {
             backgroundColor={'transparent'}
             onSwiped={onSwiped}
             onTapCard={() => {
-              console.log(url)
-              navigation.navigate('Webview', { url })
+              navigation.navigate('Show', { url, id })
+              // navigation.navigate('Webview', { url })
               // swiperRef.current.swipeLeft()
             }}
             cardVerticalMargin={50}
