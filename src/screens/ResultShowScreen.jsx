@@ -23,10 +23,8 @@ export default function ResultShowScreen({ route, navigation }) {
 
   const getResult = async (id) => {
     const res = await yelp.get(`/${id}`)
-    console.log(res.data)
     setResult(res.data)
     setCarouselItems(res.data.photos)
-    console.log(res.data)
   }
 
   useEffect(() => {
