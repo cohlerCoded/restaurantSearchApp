@@ -209,7 +209,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-evenly',
   },
   cardImage: {
-    width: 160,
+    width: 260,
     flex: 1,
     resizeMode: 'contain',
   },
