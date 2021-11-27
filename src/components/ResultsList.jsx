@@ -22,7 +22,7 @@ const ResultsList = ({ title, results, navigation }) => {
           return (
             <TouchableOpacity
               onPress={() =>
-                navigation.navigate('Show', { url: item.url, id: item.id })
+                navigation.navigate('Webview', { url: item.url, id: item.id })
               }
             >
               <ResultDetail result={item} />
