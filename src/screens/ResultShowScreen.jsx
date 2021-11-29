@@ -9,6 +9,7 @@ import {
   TouchableOpacity,
 } from 'react-native'
 import WebView from 'react-native-webview'
+import { MaterialCommunityIcons } from '@expo/vector-icons'
 import Carousel from 'react-native-snap-carousel'
 import yelp from '../api/yelp'
 
@@ -17,6 +18,14 @@ export default function ResultShowScreen({ route, navigation }) {
   const [activeIndex, setActiveIndex] = useState(0)
   const [carouselItems, setCarouselItems] = useState([])
   const ref = useRef()
+
+  const colors = {
+    red: '#EC2379',
+    blue: '#0070FF',
+    gray: '#777777',
+    white: '#ffffff',
+    black: '#000000',
+  }
 
   const url = navigation.getParam('url')
   const id = navigation.getParam('id')
@@ -96,6 +105,26 @@ export default function ResultShowScreen({ route, navigation }) {
           />
         </View>
       </View>
+      <View style={styles.bottomContainerButtons}>
+        <MaterialCommunityIcons.Button
+          name='close'
+          size={94}
+          backgroundColor='transparent'
+          underlayColor='transparent'
+          activeOpacity={0.3}
+          color={colors.red}
+          onPress={() => swiperRef.current.swipeLeft()}
+        />
+        <MaterialCommunityIcons.Button
+          name='circle-outline'
+          size={94}
+          backgroundColor='transparent'
+          underlayColor='transparent'
+          activeOpacity={0.3}
+          color={colors.blue}
+          onPress={() => swiperRef.current.swipeRight()}
+        />
+      </View>
     </SafeAreaView>
   )
 }
@@ -104,5 +133,21 @@ const styles = StyleSheet.create({
   image: {
     height: '100%',
     width: '100%',
+  },
+  container: {
+    flex: 1,
+    backgroundColor: '#ffffff',
+  },
+  swiperContainer: {
+    flex: 0.55,
+  },
+  bottomContainer: {
+    flex: 0.45,
+    justifyContent: 'space-evenly',
+  },
+  bottomContainerMeta: { alignContent: 'flex-end', alignItems: 'center' },
+  bottomContainerButtons: {
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
   },
 })
