@@ -21,7 +21,6 @@ export default () => {
               'https://i2.wp.com/paao.org/wp-content/uploads/2020/11/no-image-available.jpg?w=420&ssl=1')
         return business
       })
-      console.log(resultList.map((biz) => biz.image_url))
       setResults(resultList)
     } catch (err) {
       setErrorMessage(err.message)

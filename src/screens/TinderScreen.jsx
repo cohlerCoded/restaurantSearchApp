@@ -55,24 +55,27 @@ const transition = (
 const swiperRef = React.createRef()
 const transitionRef = React.createRef()
 
-let url, id
+let cardData
 const Card = ({ card }) => {
   url = card.url
   id = card.id
+  cardData = card
   return (
     <View style={styles.card}>
       <Image source={{ uri: card.image_url }} style={styles.cardImage} />
+      <Text>{card.name}</Text>
     </View>
   )
 }
-
 const TinderScreen = ({ navigation }) => {
   const [term, setTerm] = useState('')
   const [location, setLocation] = useState('')
   const [searchApi, results, errorMessage] = useResults()
   const [index, setIndex] = useState(0)
-
+  console.log(results)
   const onSwiped = () => {
+    console.log(cardData)
+    console.log(index)
     transitionRef.current.animateNextTransition()
     setIndex((index + 1) % results.length)
   }
@@ -105,7 +108,7 @@ const TinderScreen = ({ navigation }) => {
             backgroundColor={'transparent'}
             onSwiped={onSwiped}
             onTapCard={() => {
-              navigation.navigate('Show', { url, id })
+              navigation.navigate('Show', { id: results[index].id })
               // navigation.navigate('Webview', { url })
               // swiperRef.current.swipeLeft()
             }}
